@@ -49,13 +49,50 @@
 
     <!-- Level∞ -->
     <div class="row">
-      <button class="infinity-btn" onclick="selectLevel('infinity')">
+      <button class="infinity-btn" onclick="showInfinityCategoryMenu()">
         🌳☀️　∞ Laws of the World
       </button>
     </div>
 
     <div class="row">
       <button onclick="goMenu()">Back to Menu</button>
+    </div>
+  </div>
+
+  <!-- =======================================================
+       2b. Level∞ カテゴリー選択画面 (#infinityCategoryMenu)
+  ======================================================== -->
+  <div id="infinityCategoryMenu" style="display:none;">
+    <h2>Select Category</h2>
+    <p class="level-subtitle">Keep going. You'll see why.</p>
+
+    <!-- カテゴリーボタン -->
+    <div class="row buttons-2">
+      <button onclick="selectInfinityCategory('mechanics')" class="category-btn">
+        ⚙️ Mechanics
+      </button>
+      <button onclick="selectInfinityCategory('electromagnetism')" class="category-btn">
+        ⚡ Electromagnetism
+      </button>
+    </div>
+
+    <div class="row buttons-2">
+      <button onclick="selectInfinityCategory('thermodynamics')" class="category-btn">
+        🔥 Thermodynamics
+      </button>
+      <button onclick="selectInfinityCategory('combustion')" class="category-btn">
+        🔶 Combustion Eng.
+      </button>
+    </div>
+
+    <div class="row all-row">
+      <button onclick="selectInfinityCategory('all')" class="category-btn category-btn--all">
+        🌍 All Fields
+      </button>
+    </div>
+
+    <div class="row">
+      <button onclick="goLevel()">Back to Levels</button>
     </div>
   </div>
 

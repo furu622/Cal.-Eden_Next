@@ -28,6 +28,13 @@ function roundSmart(n) {
   return Number.isInteger(n) ? n : Math.round(n * 10) / 10;
 }
 
+// 人名リスト
+const namePool = ["Alice", "Bob", "Charlie", "Diana", "Emma", "Frank", "Grace", "Henry", "Iris", "Jack", "Kate", "Leo", "Mia", "Noah", "Olivia", "Paul"];
+
+function getRandomName() {
+  return randomPick(namePool);
+}
+
 // =====================================================
 // Entry Point
 // =====================================================
@@ -55,9 +62,17 @@ function getNormalBloomQuestion(levelKey) {
     ? state.level.muldiv
     : state.level.addsub;
 
-  let A = randRange(range);
+  // level1, level2 は A, C に人名。level3, level4 は A, C に数字
+  let A, C;
+  if (levelKey === 'level1' || levelKey === 'level2') {
+    A = getRandomName();
+    C = getRandomName();
+  } else {
+    A = randRange(range);
+    C = randRange(range);
+  }
+
   let B = randRange(range);
-  let C = randRange(range);
   let D = randRange(range);
 
   let answer;
@@ -141,17 +156,51 @@ function getInfinityQuestion() {
 
 
 // ============================
-// Level∞
+// Level∞ (Updated with Categories)
 // ============================
 
 function getInfinityQuestion() {
-  const q = randomPick(window.infinityProblems);
+  // state.infinityCategory が設定されている場合、そのカテゴリーから問題を選択
+  const category = state.infinityCategory || "all";
+  
+  let questionPool = [];
+  
+  if (category === "all") {
+    // すべてのカテゴリーの問題をマージ
+    Object.keys(window.infinityProblems).forEach(key => {
+      if (Array.isArray(window.infinityProblems[key])) {
+        questionPool = questionPool.concat(window.infinityProblems[key]);
+      }
+    });
+  } else if (window.infinityProblems[category]) {
+    // 指定されたカテゴリーの問題を使用
+    questionPool = window.infinityProblems[category];
+  } else {
+    // フォールバック：すべてを使用
+    Object.keys(window.infinityProblems).forEach(key => {
+      if (Array.isArray(window.infinityProblems[key])) {
+        questionPool = questionPool.concat(window.infinityProblems[key]);
+      }
+    });
+  }
 
-  const values = {};
+  const q = randomPick(questionPool);
 
-  for (const key in q.vars) {
-    const r = q.vars[key];
-    values[key] = Math.floor(Math.random() * (r.max - r.min + 1)) + r.min;
+  // 整数結果を得る値を探す（最大200回試行）
+  let values = {};
+  for (let attempt = 0; attempt < 200; attempt++) {
+    values = {};
+    for (const key in q.vars) {
+      const r = q.vars[key];
+      values[key] = Math.floor(Math.random() * (r.max - r.min + 1)) + r.min;
+    }
+
+    let answer = q.formula(values);
+    
+    // 整数結果なら採用
+    if (Number.isInteger(answer)) {
+      break;
+    }
   }
 
   const text = q.template.replace(/\{(\w+)\}/g, (_, k) => values[k]);

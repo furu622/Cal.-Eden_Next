@@ -46,12 +46,13 @@ let state = {
   isAnswered: false,
   timerId: null,
   countdownId: null,
-  waitingNext: false // 正誤判定後、次の問題待ち
+  waitingNext: false, // 正誤判定後、次の問題待ち
+  infinityCategory: "all" // Level∞ のカテゴリー（デフォルト：すべて）
 };
 
 /* 3. UI操作 */
 function showScreen(id) {
-  ["gameMenu", "levelMenu", "quiz"].forEach(s =>
+  ["gameMenu", "levelMenu", "infinityCategoryMenu", "quiz"].forEach(s =>
     document.getElementById(s).style.display = "none"
   );
   document.getElementById(id).style.display = "block";
@@ -75,6 +76,17 @@ function selectLevel(key) {
   prepareNextQuestion(); // 最初の問題生成
   startSession();
   document.getElementById("answer").focus(); // 入力欄にフォーカス
+}
+
+/* 4b. Level∞ カテゴリー選択画面を表示 */
+function showInfinityCategoryMenu() {
+  showScreen("infinityCategoryMenu");
+}
+
+/* 4c. Level∞ カテゴリーを選択して開始 */
+function selectInfinityCategory(category) {
+  state.infinityCategory = category;
+  selectLevel('infinity');
 }
 
 /* 5. 問題生成 */
@@ -203,7 +215,7 @@ let elapsedTimerId = null;
 
 function goMenu() {
   document.getElementById("gameMenu").style.display = "block";
-  ["levelMenu","quiz"].forEach(id => document.getElementById(id).style.display="none");
+  ["levelMenu","infinityCategoryMenu","quiz"].forEach(id => document.getElementById(id).style.display="none");
   stopTimer();
   speechSynthesis.cancel();
 }

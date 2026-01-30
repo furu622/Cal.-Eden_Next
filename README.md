@@ -1,5 +1,5 @@
 # Cal. Eden: Next 🍃
-Mental Arithmetic Training App — Cal. Eden; Next (Bloom Mode)
+Mental Arithmetic Training App — Cal. Eden: Next (Bloom Mode)
 
 © 2026 ふる. All Rights Reserved.
 
