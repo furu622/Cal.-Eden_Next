@@ -1,0 +1,113 @@
+<!--
+  Cal. Eden - Bloom Edition
+  © 2026 ふる. All Rights Reserved.
+  Unauthorized use, reproduction, or modification is prohibited.
+-->
+
+<!---------------------------------------------------------------------------->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cal. Eden - Bloom Mode</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- =======================================================
+       1. メニュー画面 (#gameMenu)
+  ======================================================== -->
+  <div id="gameMenu">
+    <h1 id="appTitle">Cal. Eden: Next</h1>
+    <p id="subtitle">~ Sharpen your mind with math and English. ~</p>
+    <div class="row buttons-2">
+      <button onclick="startBloom()" class="mode-btn" data-tooltip="英語リスニングと計算力を同時に鍛えるモード">🌺 Bloom Mode</button>
+    </div>
+  </div>
+
+  <!-- =======================================================
+       2. レベル選択画面 (#levelMenu)
+  ======================================================== -->
+  <div id="levelMenu" style="display:none;">
+    <h2>Select Level</h2>
+    <p class="level-subtitle">Improve every part of yourself!</p>
+
+    <!-- 通常レベル -->
+    <div class="row buttons-2">
+      <button onclick="selectLevel('level1')">🍀</button>
+      <button onclick="selectLevel('level2')">🍀🍀</button>
+    </div>
+    <div class="row buttons-2">
+      <button onclick="selectLevel('level3')">🍀🍀🍀</button>
+      <button onclick="selectLevel('level4')">🍀🍀🍀🍀</button>
+    </div>
+
+    <!-- 区切り -->
+    <div class="infinity-separator">— Beyond Bloom —</div>
+
+    <!-- Level∞ -->
+    <div class="row">
+      <button class="infinity-btn" onclick="selectLevel('infinity')">
+        ∞ Laws of the World
+      </button>
+    </div>
+
+    <div class="row">
+      <button onclick="goMenu()">Back to Menu</button>
+    </div>
+  </div>
+
+
+  <!-- =======================================================
+       3. クイズ画面 (#quiz)
+  ======================================================== -->
+  <div id="quiz" style="display:none;">
+    <div class="question-row">
+      <h2 id="question"></h2>
+      <div id="formula"></div>
+    </div>
+
+    <div id="sessionInfo">
+      Correct / Total: <span id="correctCount">0</span>/<span id="totalCount">0</span> |
+      Time: <span id="elapsedTime">0:00</span>
+    </div>
+
+    <input type="number" id="answer" placeholder="Your answer">
+    <div id="result"></div>
+
+    <div class="row buttons-2">
+      <button id="toggleQuestionBtn" onclick="toggleQuestion()">Show / Hide English</button>
+      <!--<button id="toggleFormulaBtn" onclick="toggleFormula()">Show / Hide Formula</button>-->
+    </div>
+
+    <div class="row buttons-2">
+      <!--<button onclick="endSession()">Achievement</button>-->
+      <button onclick="goMenu()">Back to Menu</button>
+      <button onclick="goLevel()">Back to Level</button>
+    </div>
+
+    <div class="timer-circle">
+      <svg width="120" height="120">
+        <circle
+          id="progress"
+          cx="60" cy="60" r="50"
+          stroke="#4caf50"
+          stroke-width="16"
+          fill="none"
+          stroke-dasharray="339"
+          stroke-dashoffset="0"
+          transform="rotate(-90 60 60)"
+        />
+      </svg>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="bloomData.js"></script>
+  <script src="infinityData.js"></script>
+  <script src="bloom.js"></script>
+  
+</body>
+</html>
