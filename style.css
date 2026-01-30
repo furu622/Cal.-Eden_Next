@@ -88,6 +88,18 @@ button:hover {
   font-size: 18px;
   padding: 14px 40px;
   border-radius: 30px;
+  max-width: none;
+  background: linear-gradient(135deg, #b283da, #b686dd);
+  color: #71754c;
+  border-color: #5a189a;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(157, 78, 221, 0.4);
+}
+
+.infinity-btn:hover {
+  background: linear-gradient(135deg, #b565f5, #9d4edd);
+  box-shadow: 0 6px 20px rgba(157, 78, 221, 0.6);
+  transform: translateY(-3px);
 }
 
 
