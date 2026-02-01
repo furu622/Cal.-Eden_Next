@@ -20,7 +20,9 @@ function randomPick(array) {
 }
 
 function randRange(range) {
-  return Math.floor(Math.random() * (range.max - range.min + 1)) + range.min;
+  const step = range.step || 1;
+  const steps = Math.floor((range.max - range.min) / step) + 1;
+  return Math.floor(Math.random() * steps) * step + range.min;
 }
 
 function roundSmart(n) {
@@ -192,7 +194,9 @@ function getInfinityQuestion() {
     values = {};
     for (const key in q.vars) {
       const r = q.vars[key];
-      values[key] = Math.floor(Math.random() * (r.max - r.min + 1)) + r.min;
+      const step = r.step || 1;
+      const steps = Math.floor((r.max - r.min) / step) + 1;
+      values[key] = Math.floor(Math.random() * steps) * step + r.min;
     }
 
     let answer = q.formula(values);

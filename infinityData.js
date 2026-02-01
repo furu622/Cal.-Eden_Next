@@ -251,7 +251,7 @@ window.infinityProblems = {
       vars: {
         P: { min: 500, max: 2000, step: 100 },
         t: { min: 1, max: 10 },
-        c: { min: 20, max: 40, step: 5 }
+        c: { min: 20, max: 40, step: 10 }
       },
       formula: (v) => (v.P / 1000) * v.t * v.c
     },
@@ -261,7 +261,7 @@ window.infinityProblems = {
       vars: {
         P: { min: 200, max: 1500, step: 100 },
         t: { min: 2, max: 12 },
-        c: { min: 20, max: 40, step: 5 }
+        c: { min: 20, max: 40, step: 10 }
       },
       formula: (v) => (v.P / 1000) * v.t * v.c
     },
@@ -271,7 +271,7 @@ window.infinityProblems = {
       vars: {
         P: { min: 200, max: 1500, step: 100 },
         t: { min: 2, max: 12 },
-        c: { min: 20, max: 40, step: 5 }
+        c: { min: 20, max: 40, step: 10 }
       },
       formula: (v) => (v.P / 1000) * v.t * 30 * v.c
     },
@@ -280,7 +280,7 @@ window.infinityProblems = {
       template: "An appliance consumes {E} kWh of energy. Electricity costs {c} yen per kWh. Find the total cost.",
       vars: {
         E: { min: 5, max: 50 },
-        c: { min: 20, max: 40, step: 5 }
+        c: { min: 20, max: 40, step: 10 }
       },
       formula: (v) => v.E * v.c
     },
@@ -290,7 +290,7 @@ window.infinityProblems = {
       vars: {
         cost: { min: 100, max: 1000, step: 50 },
         t: { min: 2, max: 10 },
-        c: { min: 20, max: 40, step: 5 }
+        c: { min: 20, max: 40, step: 10 }
       },
       formula: (v) => (v.cost / (v.t * v.c)) * 1000
     },
@@ -299,46 +299,115 @@ window.infinityProblems = {
   ],
 
   // ===== 熱力学 (Thermodynamics) =====
-  thermodynamics: [
+  electromagnetism: [
     {
-      template: "A substance with mass {m} g has a specific heat capacity of {c} J/g°C. How much heat is needed to raise its temperature by {T} °C? (Q = m × c × ΔT)",
+      template: "How much heat is required to raise the temperature of {m} kg of a substance with specific heat {c} J/kg·K by {dT} K?",
       vars: {
-        m: { min: 100, max: 500 },
-        c: { min: 1, max: 5 },
-        T: { min: 10, max: 50 }
+        m: { min: 1, max: 10 },
+        c: { min: 200, max: 1000, step: 100 },
+        dT: { min: 10, max: 40, step: 10},
       },
-      formula: (v) => v.m * v.c * v.ΔT
+      formula: (v) => v.m * v.c * v.dT
+    },
+
+
+    {
+      template: "A heat of {Q} J is supplied to {m} kg of a substance with specific heat {c} J/kg·K. Find the temperature change.",
+      vars: {
+        Q: { min: 10000, max: 40000, step: 1000 },
+        m: { min: 1, max: 10 },
+        c: { min: 200, max: 1000, step: 100 }
+      },
+      formula: (v) => v.Q / (v.m * v.c)
+    },
+
+
+    {
+      template: "How much heat is needed to change {m} kg of a substance with latent heat {L} J/kg?",
+      vars: {
+        m: { min: 1, max: 10 },
+        L: { min: 100000, max: 400000, step: 10000 }
+      },
+      formula: (v) => v.m * v.L
+    },
+
+
+    {
+      template: "A heat engine does {W} J of work while absorbing {Q} J of heat. Find the efficiency.",
+      vars: {
+        W: { min: 1000, max: 8000, step: 1000 },
+        Q: { min: 9000, max: 20000, step: 1000 }
+      },
+      formula: (v) => v.W / v.Q
     },
 
     {
-      template: "A gas expands at constant pressure. Initial volume is {V1} L and final volume is {V2} L. If initial temperature is {T1} K, find the final temperature using the ideal gas law.",
+      template: "An ideal gas has pressure {P} Pa, volume {V} m³, and amount {n} mol. Find the temperature. (R = 8)",
       vars: {
-        V1: { min: 2, max: 10 },
-        V2: { min: 12, max: 30 },
-        T1: { min: 273, max: 373 }
+        P: { min: 100000, max: 500000, step: 10000},
+        V: { min: 1, max: 5 },
+        n: { min: 1, max: 5 }
       },
-      formula: (v) => v.T1 * v.V2 / v.V1
+      formula: (v) => (v.P * v.V) / (v.n * 8)
     },
 
     {
-      template: "The internal energy of a gas increases by {U} J. If the gas does work of {W} J, find the heat absorbed using the first law of thermodynamics (Q = ΔU + W).",
+      template: "Find the internal energy of a monatomic ideal gas with {n} mol at temperature {T} K. (R = 8)",
       vars: {
-        U: { min: 100, max: 500 },
-        W: { min: 50, max: 300 }
+        n: { min: 1, max: 5 },
+        T: { min: 200, max: 600,step: 100 }
       },
-      formula: (v) => v.U + v.W
+      formula: (v) => 1.5 * v.n * 8 * v.T
     },
 
     {
-      template: "Water with mass {m} kg at {T1} °C is mixed with water of mass {m2} kg at {T2} °C. Find the final equilibrium temperature (ignoring heat loss).",
+      template: "A gas expands at constant pressure {P} Pa from {V1} m³ to {V2} m³. Find the work done.",
       vars: {
-        m: { min: 1, max: 3 },
-        T1: { min: 20, max: 40, step: 5 },
-        m2: { min: 1, max: 3 },
-        T2: { min: 60, max: 80, step: 5 }
+        P: { min: 100000, max: 400000, step: 10000},
+        V1: { min: 1, max: 3 },
+        V2: { min: 4, max: 7 }
       },
-      formula: (v) => (v.m * v.T1 + v.m2 * v.T2) / (v.m + v.m2)
+      formula: (v) => v.P * (v.V2 - v.V1)
     },
+
+    {
+      template: "A system's internal energy increases by {dU} J while doing {W} J of work. How much heat was supplied?",
+      vars: {
+        dU: { min: 1000, max: 8000, step: 1000 },
+        W: { min: 1000, max: 8000, step: 1000 }
+      },
+      formula: (v) => v.dU + v.W
+    },
+
+    {
+      template: "A system receives {Q} J of heat and does {W} J of work. Find the change in internal energy.",
+      vars: {
+        Q: { min: 2000, max: 12000, step: 1000 },
+        W: { min: 1000, max: 8000, step: 1000 }
+      },
+      formula: (v) => v.Q - v.W
+    },
+
+    {
+      template: "A system receives {Q} J of heat and its internal energy increases by {dU} J. Find the work done by the system.",
+      vars: {
+        Q: { min: 3000, max: 15000, step: 1000 },
+        dU: { min: 1000, max: 9000 , step: 1000 }
+      },
+      formula: (v) => v.Q - v.dU
+    },
+
+    {
+      template: "A system receives {Q} J of heat while {W} J of work is done on it. Find the change in internal energy.",
+      vars: {
+        Q: { min: 2000, max: 12000, step: 1000 },
+        W: { min: 1000, max: 8000, step: 1000 }
+      },
+      formula: (v) => v.Q + v.W
+    }
+
+
+
 
   ],
 
@@ -395,5 +464,69 @@ window.infinityProblems = {
     },
 
 
+  ],
+
+  // ===== 伝熱工学 (Heat Transfer Engineering) =====
+  heattransfer : [
+    {
+      template: "Heat flows through a wall with thermal conductivity {k} W/m·K, area {A} m², thickness {L} m, and temperature difference {dT} K for {t} s. Find the heat transferred.",
+      vars: {
+        k: { min: 100, max: 400, step: 100 },
+        A: { min: 1, max: 5 },
+        L: { min: 1, max: 5 },
+        dT: { min: 20, max: 100, step: 20 },
+        t: { min: 10, max: 60, step: 10 }
+      },
+      formula: (v) => (v.k * v.A * v.dT / v.L) * v.t
+    },
+
+    {
+      template: "An object loses heat to air with heat transfer coefficient {h} W/m²·K, surface area {A} m², temperature difference {dT} K for {t} s. Find the heat lost.",
+      vars: {
+        h: { min: 10, max: 100, step: 10 },
+        A: { min: 1, max: 5 },
+        dT: { min: 10, max: 60, step: 10 },
+        t: { min: 10, max: 60, step: 10 }
+      },
+      formula: (v) => v.h * v.A * v.dT * v.t
+    },
+
+    {
+      template: "A surface with area {A} m² radiates heat to surroundings. Its temperature is {T} K and surroundings are at {T0} K. Find the heat radiated in {t} s. (σ = 5.67e-8)",
+      vars: {
+        A: { min: 1, max: 5 },
+        T: { min: 400, max: 800, step: 100 },
+        T0: { min: 200, max: 300, step: 50 },
+        t: { min: 10, max: 60, step: 10 }
+      },
+      formula: (v) => 5.67e-8 * v.A * (Math.pow(v.T,4) - Math.pow(v.T0,4)) * v.t
+    },
+
+    {
+      template: "Heat {Q} J passes through a wall with conductivity {k} W/m·K, area {A} m², thickness {L} m in {t} s. Find the temperature difference.",
+      vars: {
+        Q: { min: 10000, max: 40000, step: 10000 },
+        k: { min: 100, max: 400, step: 100 },
+        A: { min: 1, max: 5 },
+        L: { min: 1, max: 5 },
+        t: { min: 10, max: 60, step: 10 }
+      },
+      formula: (v) => (v.Q * v.L) / (v.k * v.A * v.t)
+    },
+
+    {
+      template: "An object loses {Q} J of heat through convection from area {A} m² with temperature difference {dT} K in {t} s. Find the heat transfer coefficient.",
+      vars: {
+        Q: { min: 10000, max: 40000, step: 10000 },
+        A: { min: 1, max: 5 },
+        dT: { min: 10, max: 60, step: 10 },
+        t: { min: 10, max: 60, step: 10 }
+      },
+      formula: (v) => v.Q / (v.A * v.dT * v.t)
+    },
+
   ]
+
+
+
 };
