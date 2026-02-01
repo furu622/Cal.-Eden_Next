@@ -215,7 +215,7 @@ button:hover {
 .timer-circle { margin: 20px auto; width: 120px; height: 120px; position: relative; }
 .timer-circle svg { width: 100%; height: 100%; }
 
-#levelMenu h2, #infinityCategoryMenu h2, #quiz h2 {
+#levelMenu h2, #infinityGroupMenu h2, #infinityCategoryMenu h2, #quiz h2 {
   font-family: sans-serif;  
   color: #0d6b19;
   font-size: 2em;
@@ -224,7 +224,7 @@ button:hover {
   position: relative; 
 }
 
-#levelMenu h2::after, #infinityCategoryMenu h2::after, #quiz h2::after { content: "🍃"; position: absolute; right: -1em; top: -0.6em; font-size: 0.5em; }
+#levelMenu h2::after, #infinityGroupMenu h2::after, #infinityCategoryMenu h2::after, #quiz h2::after { content: "🍃"; position: absolute; right: -1em; top: -0.6em; font-size: 0.5em; }
 
 .level-subtitle { font-size: 1em; font-style: italic; color: #7f8c8d; margin-bottom: 15px; }
 

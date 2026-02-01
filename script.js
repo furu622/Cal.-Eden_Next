@@ -47,12 +47,51 @@ let state = {
   timerId: null,
   countdownId: null,
   waitingNext: false, // 正誤判定後、次の問題待ち
+  infinityGroup: null, // Level∞ のグループ（forces, electricity, energy, all）
   infinityCategory: "all" // Level∞ のカテゴリー（デフォルト：すべて）
+};
+
+/* Level∞ グループマッピング */
+const infinityGroups = {
+  forces: {
+    name: "Forces & Motion",
+    categories: ["mechanics_linear", "statics", "rotational", "machines"]
+  },
+  electricity: {
+    name: "Electricity & Fields",
+    categories: ["electromagnetism", "circuits"]
+  },
+  energy: {
+    name: "Energy & Heat",
+    categories: ["thermodynamics", "heattransfer", "combustion"]
+  },
+  all: {
+    name: "All Fields",
+    categories: null // すべてのカテゴリーを含む
+  }
+};
+
+// bloom.js からアクセスできるようにグローバル登録
+if (typeof window !== "undefined") {
+  window.infinityGroups = infinityGroups;
+}
+
+/* カテゴリー表示用マッピング */
+const categoryDisplay = {
+  mechanics_linear: { label: "Linear Motion", icon: "🎊" },
+  statics: { label: "Statics", icon: "⚖️" },
+  rotational: { label: "Rotational Motion", icon: "🎠" },
+  machines: { label: "Machines", icon: "💪" },
+  electromagnetism: { label: "Electromagnetism", icon: "⚡" },
+  circuits: { label: "Circuits", icon: "🔌" },
+  thermodynamics: { label: "Thermodynamics", icon: "🔥" },
+  heattransfer: { label: "Heat Transfer", icon: "🌡️" },
+  combustion: { label: "Combustion Eng.", icon: "🟦" }
 };
 
 /* 3. UI操作 */
 function showScreen(id) {
-  ["gameMenu", "levelMenu", "infinityCategoryMenu", "quiz"].forEach(s =>
+  ["gameMenu", "levelMenu", "infinityGroupMenu", "infinityCategoryMenu", "quiz"].forEach(s =>
     document.getElementById(s).style.display = "none"
   );
   document.getElementById(id).style.display = "block";
@@ -78,12 +117,79 @@ function selectLevel(key) {
   document.getElementById("answer").focus(); // 入力欄にフォーカス
 }
 
-/* 4b. Level∞ カテゴリー選択画面を表示 */
+/* 4a. Level∞ グループ選択画面を表示 */
+function showInfinityGroupMenu() {
+  showScreen("infinityGroupMenu");
+}
+
+/* 4b. Level∞ グループを選択 */
+function selectInfinityGroup(group) {
+  state.infinityGroup = group;
+  
+  // All Fields の場合は直接出題
+  if (group === "all") {
+    state.infinityCategory = "all";
+    selectLevel('infinity');
+  } else {
+    // その他のグループは第2階層を表示
+    showInfinityCategoryMenu();
+  }
+}
+
+/* 4c. Level∞ カテゴリー選択画面を表示 */
 function showInfinityCategoryMenu() {
+  const group = state.infinityGroup;
+  const groupInfo = infinityGroups[group];
+  
+  if (!groupInfo || !groupInfo.categories) {
+    console.error("Invalid group:", group);
+    return;
+  }
+  
+  // タイトルを更新
+  document.getElementById("categoryMenuTitle").textContent = `Select Topics: ${groupInfo.name}`;
+  
+  // コンティナを初期化
+  const container = document.getElementById("categoryButtonsContainer");
+  container.innerHTML = "";
+  
+  // グループ内のカテゴリーボタンを生成
+  const categories = groupInfo.categories;
+  let currentRow = null;
+  
+  categories.forEach((cat, index) => {
+    // 2列レイアウト用に2つごとに新しい一行を作成
+    if (index % 2 === 0) {
+      currentRow = document.createElement("div");
+      currentRow.className = "row buttons-2";
+      container.appendChild(currentRow);
+    }
+    
+    const btn = document.createElement("button");
+    btn.className = "category-btn";
+    btn.onclick = () => selectInfinityCategory(cat);
+    
+    const display = categoryDisplay[cat];
+    btn.textContent = `${display.icon} ${display.label}`;
+    
+    currentRow.appendChild(btn);
+  });
+
+    // "All Questions" ボタンを追加
+  const allQuestionsBtn = document.createElement("button");
+  allQuestionsBtn.className = "category-btn category-btn--all";
+  allQuestionsBtn.onclick = () => selectInfinityCategory("group_" + group);
+  allQuestionsBtn.textContent = "🌍 All Topics";
+  
+  const allRow = document.createElement("div");
+  allRow.className = "row all-row";
+  allRow.appendChild(allQuestionsBtn);
+  container.appendChild(allRow);
+  
   showScreen("infinityCategoryMenu");
 }
 
-/* 4c. Level∞ カテゴリーを選択して開始 */
+/* 4d. Level∞ カテゴリーを選択して開始 */
 function selectInfinityCategory(category) {
   state.infinityCategory = category;
   selectLevel('infinity');
@@ -215,7 +321,7 @@ let elapsedTimerId = null;
 
 function goMenu() {
   document.getElementById("gameMenu").style.display = "block";
-  ["levelMenu","infinityCategoryMenu","quiz"].forEach(id => document.getElementById(id).style.display="none");
+  ["levelMenu","infinityGroupMenu","infinityCategoryMenu","quiz"].forEach(id => document.getElementById(id).style.display="none");
   stopTimer();
   speechSynthesis.cancel();
 }

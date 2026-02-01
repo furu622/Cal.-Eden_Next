@@ -45,15 +45,21 @@ Mental Arithmetic Training App — Cal. Eden: Next (Bloom Mode)
 ---
 
 ## 📁 ファイル構成
-
 Cal-Eden_Next/
 ├── index.html
 ├── style.css
 ├── script.js
 ├── bloom.js
 ├── bloomData.js
+├── infinityData/               # カテゴリ別の Level∞ 問題データ
+│   ├── mechanics.js
+│   ├── electromagnetism.js
+│   ├── circuits.js
+│   ├── thermodynamics.js
+│   ├── combustion.js
+│   └── heattransfer.js
+├── infinityData.js            # 統合チェック用（カテゴリ読み込み後に実行）
 └── README.md
-
 
 ---
 

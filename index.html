@@ -49,7 +49,7 @@
 
     <!-- Level∞ -->
     <div class="row">
-      <button class="infinity-btn" onclick="showInfinityCategoryMenu()">
+      <button class="infinity-btn" onclick="showInfinityGroupMenu()">
         🌳☀️　∞ Laws of the World
       </button>
     </div>
@@ -60,45 +60,51 @@
   </div>
 
   <!-- =======================================================
-       2b. Level∞ カテゴリー選択画面 (#infinityCategoryMenu)
+       2a. Level∞ グループ選択画面 (#infinityGroupMenu)
   ======================================================== -->
-  <div id="infinityCategoryMenu" style="display:none;">
-    <h2>Select Category</h2>
+  <div id="infinityGroupMenu" style="display:none;">
+    <h2>Select Field</h2>
     <p class="level-subtitle">Keep going. You'll see why.</p>
 
-    <!-- カテゴリーボタン -->
+    <!-- グループボタン -->
     <div class="row buttons-2">
-      <button onclick="selectInfinityCategory('mechanics')" class="category-btn">
-        ⚙️ Mechanics
+      <button onclick="selectInfinityGroup('forces')" class="category-btn">
+        💪 Forces & Motion
       </button>
-      <button onclick="selectInfinityCategory('electromagnetism')" class="category-btn">
-        ⚡ Electromagnetism
+      <button onclick="selectInfinityGroup('electricity')" class="category-btn">
+        ⚡ Electricity & Fields
       </button>
     </div>
 
-    <div class="row buttons-2">
-      <button onclick="selectInfinityCategory('thermodynamics')" class="category-btn">
-        🔥 Thermodynamics
-      </button>
-      <button onclick="selectInfinityCategory('heattransfer')" class="category-btn">
-        🌡️ Heat Transfer
+    <div class="row buttons-1">
+      <button onclick="selectInfinityGroup('energy')" class="category-btn">
+        🔥 Energy & Heat
       </button>
     </div>
-
-    <div class="row buttons-2">
-      <button onclick="selectInfinityCategory('combustion')" class="category-btn">
-        🔶 Combustion Eng.
-      </button>
-    </div>
-
-    <div class="row all-row">
-      <button onclick="selectInfinityCategory('all')" class="category-btn category-btn--all">
+    
+    <div class="row buttons-1">
+      <button onclick="selectInfinityGroup('all')" class="category-btn category-btn--all">
         🌍 All Fields
       </button>
     </div>
 
     <div class="row">
       <button onclick="goLevel()">Back to Levels</button>
+    </div>
+  </div>
+
+  <!-- =======================================================
+       2b. Level∞ カテゴリー選択画面 (#infinityCategoryMenu)
+  ======================================================== -->
+  <div id="infinityCategoryMenu" style="display:none;">
+    <h2 id="categoryMenuTitle">Select Topics</h2>
+    <p class="level-subtitle">Keep going. You'll see why.</p>
+
+    <!-- ボタンは JavaScript で動的に産生 -->
+    <div id="categoryButtonsContainer"></div>
+
+    <div class="row">
+      <button onclick="showInfinityGroupMenu()">Back to Fields</button>
     </div>
   </div>
 
@@ -150,8 +156,15 @@
   <script src="script.js"></script>
   <script src="bloomData.js"></script>
   <!-- Level∞ 問題データファイル（各カテゴリー別） -->
+  <!-- Mechanics sub-categories (読み込み順序: mechanics.jsより前に読み込むこと) -->
+  <script src="infinityData/mechanics_linear.js"></script>
+  <script src="infinityData/statics.js"></script>
+  <script src="infinityData/rotational.js"></script>
+  <script src="infinityData/machines.js"></script>
+  <!-- Main category files -->
   <script src="infinityData/mechanics.js"></script>
   <script src="infinityData/electromagnetism.js"></script>
+  <script src="infinityData/circuits.js"></script>
   <script src="infinityData/thermodynamics.js"></script>
   <script src="infinityData/combustion.js"></script>
   <script src="infinityData/heattransfer.js"></script>

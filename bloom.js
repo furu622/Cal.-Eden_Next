@@ -167,7 +167,20 @@ function getInfinityQuestion() {
   
   let questionPool = [];
   
-  if (category === "all") {
+  // グループ指定の場合 (例: "group_forces")
+  if (category.startsWith("group_")) {
+    const groupKey = category.replace("group_", "");
+    const groupInfo = window.infinityGroups ? window.infinityGroups[groupKey] : null;
+    
+    if (groupInfo && groupInfo.categories) {
+      // グループ内のすべてのカテゴリーから問題を統合
+      groupInfo.categories.forEach(cat => {
+        if (window.infinityProblems[cat] && Array.isArray(window.infinityProblems[cat])) {
+          questionPool = questionPool.concat(window.infinityProblems[cat]);
+        }
+      });
+    }
+  } else if (category === "all") {
     // すべてのカテゴリーの問題をマージ
     Object.keys(window.infinityProblems).forEach(key => {
       if (Array.isArray(window.infinityProblems[key])) {
