@@ -2,14 +2,6 @@
 // Level∞ 問題データ統合ファイル
 // 各カテゴリーの問題は infinityData/ フォルダの個別ファイルで定義
 
-// 読み込み順序：
-// 1. infinityData/mechanics.js
-// 2. infinityData/electromagnetism.js
-// 3. infinityData/thermodynamics.js
-// 4. infinityData/combustion.js
-// 5. infinityData/heattransfer.js
-// 6. このファイル
-
 // 統計情報の表示と検証
 // infinityData.js
 // Level∞ 問題データ統合・表示（カテゴリ再編対応）
@@ -41,7 +33,7 @@ const CATEGORY_MAP = {
 
   electromagnetism: "Electricity & Field",
   circuits: "Electricity & Field",
-  
+
   thermodynamics: "Energy & Heat",
   combustion: "Energy & Heat",
   heattransfer: "Energy & Heat",
