@@ -33,3 +33,6 @@ const machines = [
         formula: (v) => (9550 * v.P) / v.T
     },
 ];
+
+
+window.infinityProblems.machines = machines;

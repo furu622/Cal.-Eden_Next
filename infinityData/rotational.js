@@ -22,3 +22,6 @@ const rotational = [
         formula: (v) => v.k * v.k
     },
 ];
+
+
+window.infinityProblems.rotational = rotational;
