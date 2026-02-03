@@ -116,28 +116,7 @@ function getNormalBloomQuestion(levelKey) {
 // Level∞ : Scientific Laws Mode
 // =====================================================
 
-function pickDivisibleValues(q) {
-  // 割り算系は割り切れる組を探す
-  for (let i = 0; i < 50; i++) {
-    const values = {};
-    for (const key in q.vars) {
-      values[key] = randRange(q.vars[key]);
-    }
 
-    const result = q.formula(values);
-
-    if (Number.isInteger(result)) {
-      return values;
-    }
-  }
-
-  // 見つからなければ普通に返す
-  const values = {};
-  for (const key in q.vars) {
-    values[key] = randRange(q.vars[key]);
-  }
-  return values;
-}
 
 function getInfinityQuestion() {
   const q = randomPick(infinityProblems);
@@ -164,14 +143,14 @@ function getInfinityQuestion() {
 function getInfinityQuestion() {
   // state.infinityCategory が設定されている場合、そのカテゴリーから問題を選択
   const category = state.infinityCategory || "all";
-  
+
   let questionPool = [];
-  
+
   // グループ指定の場合 (例: "group_forces")
   if (category.startsWith("group_")) {
     const groupKey = category.replace("group_", "");
     const groupInfo = window.infinityGroups ? window.infinityGroups[groupKey] : null;
-    
+
     if (groupInfo && groupInfo.categories) {
       // グループ内のすべてのカテゴリーから問題を統合
       groupInfo.categories.forEach(cat => {
@@ -207,13 +186,19 @@ function getInfinityQuestion() {
     values = {};
     for (const key in q.vars) {
       const r = q.vars[key];
-      const step = r.step || 1;
-      const steps = Math.floor((r.max - r.min) / step) + 1;
-      values[key] = Math.floor(Math.random() * steps) * step + r.min;
+
+      if (Array.isArray(r.values)) {
+        values[key] = randomPick(r.values);
+      } else {
+        const step = r.step || 1;
+        const steps = Math.floor((r.max - r.min) / step) + 1;
+        values[key] = Math.floor(Math.random() * steps) * step + r.min;
+      }
     }
 
+
     let answer = q.formula(values);
-    
+
     // 整数結果なら採用
     if (Number.isInteger(answer)) {
       break;

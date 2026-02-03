@@ -8,12 +8,14 @@
 
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cal. Eden: Next - Bloom Mode</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <!-- =======================================================
@@ -81,7 +83,7 @@
         🔥 Energy & Heat
       </button>
     </div>
-    
+
     <div class="row buttons-1">
       <button onclick="selectInfinityGroup('all')" class="category-btn category-btn--all">
         🌍 All Fields
@@ -139,16 +141,8 @@
 
     <div class="timer-circle">
       <svg width="120" height="120">
-        <circle
-          id="progress"
-          cx="60" cy="60" r="50"
-          stroke="#4caf50"
-          stroke-width="16"
-          fill="none"
-          stroke-dasharray="339"
-          stroke-dashoffset="0"
-          transform="rotate(-90 60 60)"
-        />
+        <circle id="progress" cx="60" cy="60" r="50" stroke="#4caf50" stroke-width="16" fill="none"
+          stroke-dasharray="339" stroke-dashoffset="0" transform="rotate(-90 60 60)" />
       </svg>
     </div>
   </div>
@@ -156,18 +150,32 @@
   <script src="script.js"></script>
   <script src="bloomData.js"></script>
   <!-- Level∞ 問題データファイル（各カテゴリー別） -->
-  <script src="infinityData/mechanics_linear.js"></script>
-  <script src="infinityData/statics.js"></script>
-  <script src="infinityData/rotational.js"></script>
-  <script src="infinityData/machines.js"></script>
-  <!-- Main category files -->
-  <script src="infinityData/electromagnetism.js"></script>
-  <script src="infinityData/circuits.js"></script>
-  <script src="infinityData/thermodynamics.js"></script>
-  <script src="infinityData/combustion.js"></script>
-  <script src="infinityData/heattransfer.js"></script>
+  <!--Arithmetic & Proportions  -->
+
+  <!--Algebra Fundamentals  -->
+
+  <!--Functions & Graph Sense  -->
+
+  <!--Geometry & Measurement  -->
+  
+  <!-- Force & Motion  -->
+  <script src="infinityData/Force_&_Motion/mechanics_linear.js"></script>
+  <script src="infinityData/Force_&_Motion/statics.js"></script>
+  <script src="infinityData/Force_&_Motion/rotational.js"></script>
+  <script src="infinityData/Force_&_Motion/machines.js"></script>
+  <!-- Electricity & Fiedls  -->
+  <script src="infinityData/Electricity_&_Fiedls/electromagnetism.js"></script>
+  <script src="infinityData/Electricity_&_Fiedls/circuits.js"></script>
+  <!-- Energy & Heat  -->
+  <script src="infinityData/Energy_&_Heat/thermodynamics.js"></script>
+  <script src="infinityData/Energy_&_Heat/combustion.js"></script>
+  <script src="infinityData/Energy_&_Heat/heattransfer.js"></script>
+
+
+
   <script src="infinityData.js"></script>
   <script src="bloom.js"></script>
-  
+
 </body>
+
 </html>
