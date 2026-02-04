@@ -26,6 +26,12 @@ window.infinityCategoryTree = {
 
 
 const CATEGORY_MAP = {
+  proportionality: "Arithmetic & Proportions",
+  inverse_proportionality: "Arithmetic & Proportions",
+  ratios: "Arithmetic & Proportions",
+  scaling_laws: "Arithmetic & Proportions",
+  unit_conversion: "Arithmetic & Proportions",
+
   mechanics_linear: "Forces & Motion",
   statics: "Forces & Motion",
   rotational: "Forces & Motion",

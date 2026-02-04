@@ -65,6 +65,16 @@ const infinityGroups = {
     name: "Energy & Heat",
     categories: ["thermodynamics", "heattransfer", "combustion"]
   },
+  arithmetic_proportions: {
+    name: "Arithmetic",
+    categories: [
+      "proportionality",
+      "inverse_proportionality",
+      "ratios",
+      "scaling_laws",
+      "unit_conversion"
+    ]
+  },
   all: {
     name: "All Fields",
     categories: null // すべてのカテゴリーを含む
@@ -78,15 +88,27 @@ if (typeof window !== "undefined") {
 
 /* カテゴリー表示用マッピング */
 const categoryDisplay = {
+  // Forces & Motion
   mechanics_linear: { label: "Linear Motion", icon: "🎊" },
   statics: { label: "Statics", icon: "⚖️" },
   rotational: { label: "Rotational Motion", icon: "🎠" },
   machines: { label: "Machines", icon: "💪" },
+
+  // Electricity & Fields
   electromagnetism: { label: "Electromagnetism", icon: "⚡" },
   circuits: { label: "Circuits", icon: "🔌" },
+
+  // Energy & Heat
   thermodynamics: { label: "Thermodynamics", icon: "🔥" },
   heattransfer: { label: "Heat Transfer", icon: "🌡️" },
-  combustion: { label: "Combustion Eng.", icon: "🟦" }
+  combustion: { label: "Combustion Eng.", icon: "🟦" },
+
+  // Arithmetic & Proportions
+  proportionality: { label: "Proportionality", icon: "📈" },
+  inverse_proportionality: { label: "Inverse Proportionality", icon: "📉" },
+  ratios: { label: "Ratios", icon: "⚖️" },
+  scaling_laws: { label: "Scaling Laws", icon: "📏" },
+  unit_conversion: { label: "Unit Conversion", icon: "🔄" }
 };
 
 /* 3. UI操作 */

@@ -196,6 +196,12 @@ function getInfinityQuestion() {
       }
     }
 
+    if (typeof q.extraVars === "function") {
+      const extra = q.extraVars(values);
+      for (const k in extra) {
+        values[k] = extra[k];
+      }
+    }
 
     let answer = q.formula(values);
 
