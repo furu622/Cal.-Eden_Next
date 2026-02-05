@@ -1,7 +1,6 @@
 # Cal. Eden: Next 🍃
 Mental Arithmetic Training App — Cal. Eden: Next (Bloom Mode)
-
-© 2026 ふる. All Rights Reserved.
+Train mental arithmetic, working memory, and English listening — all at once.
 
 ---
 
@@ -45,21 +44,75 @@ Mental Arithmetic Training App — Cal. Eden: Next (Bloom Mode)
 ---
 
 ## 📁 ファイル構成
-Cal-Eden_Next/
-├── index.html
-├── style.css
-├── script.js
-├── bloom.js
-├── bloomData.js
-├── infinityData/               # カテゴリ別の Level∞ 問題データ
-│   ├── mechanics.js
-│   ├── electromagnetism.js
-│   ├── circuits.js
-│   ├── thermodynamics.js
-│   ├── combustion.js
-│   └── heattransfer.js
-├── infinityData.js            # 統合チェック用（カテゴリ読み込み後に実行）
-└── README.md
+Project structure:
+Cal. Eden_Next
+│  bloom.js
+│  bloomData.js
+│  index.html
+│  infinityData.js
+│  LICENSE
+│  README.md
+│  script.js
+│  style.css
+│  
+└─infinityData
+    ├─Algebra_Fundamentals
+    │      linear_equations.js
+    │      rearranging_formulas.js
+    │      solving_for_variables.js
+    │      systems_of_equations.js
+    │
+    ├─Arithmetic_&_Proportions
+    │      inverse_proportionality.js
+    │      proportionality.js
+    │      ratios.js
+    │      scaling_laws.js
+    │      unit_conversion.js
+    │
+    ├─Electricity_&_Fiedls
+    │      circuits.js
+    │      electromagnetism.js
+    │
+    ├─Energy_&_Heat
+    │      combustion.js
+    │      heattransfer.js
+    │      thermodynamics.js
+    │
+    ├─Force_&_Motion
+    │      machines.js
+    │      mechanics_linear.js
+    │      rotational.js
+    │      statics.js
+    │
+    ├─Functions_&_Graph Sense
+    │      inverse_functions.js
+    │      linear_functions.js
+    │      power_laws.js
+    │      qualitative_graph_reading.js
+    │      slope_&_rate.js
+    │
+    ├─Geometry_&_Measurement
+    │      angles_&_rotation.js
+    │      area_&_volume_.js
+    │      basic_geometry.js
+    │      coordinates.js
+    │      similarity.js
+    │
+    ├─Probability & Uncertainty
+    │      basic_probability.js
+    │      distributions.js
+    │      error_&_tolerance.js
+    │      expected_value.js
+    │
+    ├─Rates & Accumulation
+    │      accumulation.js
+    │      area under_curve.js
+    │      average_rate.js
+    │      instantaneous_rate.js
+    │      simple_differentiation_ideas.js
+    │
+    └─☆legacy
+            mechanics.js
 
 ---
 
@@ -73,14 +126,26 @@ Cal-Eden_Next/
 
 ---
 
-## ⚖️ 著作権について
+## ⚖️ License / ライセンス
 
-このソフトウェアおよびソースコードは著作権によって保護されています。
+本プロジェクトは  
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International  
+（CC BY-NC-ND 4.0）ライセンスのもとで公開されています。
 
-© 2026 ふる. All Rights Reserved.
-Unauthorized use, reproduction, or modification is prohibited.
+- 商用利用は禁止されています
+- 改変および改変物の再配布は禁止されています
+- クレジット表記が必要です
 
-無断転載・改変・再配布は禁止されています。
+This project is licensed under the  
+CC BY-NC-ND 4.0 International License.
+
+- Commercial use is not permitted
+- Redistribution of modified versions is not permitted
+- Attribution is required
+
+See the LICENSE file for the full legal text.
+
+
 
 ---
 

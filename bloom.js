@@ -1,7 +1,6 @@
 /*
-  Cal. Eden - Bloom Edition
-  © 2026 ふる. All Rights Reserved.
-  Unauthorized use, reproduction, or modification is prohibited.
+ Cal. Eden: Next - Bloom Edition
+© 2026 ふる. This file is part of this project.
 */
 
 /*=================================================================*/
@@ -112,28 +111,7 @@ function getNormalBloomQuestion(levelKey) {
   };
 }
 
-// =====================================================
-// Level∞ : Scientific Laws Mode
-// =====================================================
 
-
-
-function getInfinityQuestion() {
-  const q = randomPick(infinityProblems);
-
-  // 割り切れる組を優先
-  const values = pickDivisibleValues(q);
-
-  const text = q.template.replace(/\{(\w+)\}/g, (_, k) => values[k]);
-
-  const answer = roundSmart(q.formula(values));
-
-  return {
-    result: answer,
-    questionText: text,
-    formulaText: ""
-  };
-}
 
 
 // ============================

@@ -1,7 +1,6 @@
 /*
-  Cal. Eden - Bloom Edition
-  © 2026 ふる. All Rights Reserved.
-  Unauthorized use, reproduction, or modification is prohibited.
+  Cal. Eden: Next - Bloom Edition
+  © 2026 ふる. This file is part of this project.
 */
 
 /*=================================================================*/

@@ -1,7 +1,6 @@
 <!--
-  Cal. Eden - Bloom Edition
-  © 2026 ふる. All Rights Reserved.
-  Unauthorized use, reproduction, or modification is prohibited.
+  Cal. Eden: Next - Bloom Edition
+  © 2026 ふる. This file is part of this project.
 -->
 
 <!---------------------------------------------------------------------------->
@@ -18,108 +17,94 @@
 
 <body>
 
-  <!-- =======================================================
-       1. メニュー画面 (#gameMenu)
-  ======================================================== -->
+  <!-- 1. メニュー画面 -->
   <div id="gameMenu">
     <h1 id="appTitle">Cal. Eden: Next</h1>
     <p id="subtitle">~ Sharpen your mind with math and English. ~</p>
     <div class="row buttons-2">
-      <button onclick="startBloom()" class="mode-btn" data-tooltip="英語リスニングと計算力を同時に鍛えるモード">🌺 Bloom Mode</button>
+      <button class="btn mode-btn" onclick="startBloom()" data-tooltip="英語リスニングと計算力を同時に鍛えるモード">
+        🌺 Bloom Mode
+      </button>
     </div>
   </div>
 
-  <!-- =======================================================
-       2. レベル選択画面 (#levelMenu)
-  ======================================================== -->
+  <!-- 2. レベル選択画面 -->
   <div id="levelMenu" style="display:none;">
-    <h2>Select Level</h2>
+    <h2 class="section-title">Select Level</h2>
     <p class="level-subtitle">Improve every part of yourself!</p>
 
-    <!-- 通常レベル -->
     <div class="row buttons-2">
-      <button onclick="selectLevel('level1')">🍀</button>
-      <button onclick="selectLevel('level2')">🍀🍀</button>
+      <button class="btn" onclick="selectLevel('level1')">🍀</button>
+      <button class="btn" onclick="selectLevel('level2')">🍀🍀</button>
     </div>
     <div class="row buttons-2">
-      <button onclick="selectLevel('level3')">🍀🍀🍀</button>
-      <button onclick="selectLevel('level4')">🍀🍀🍀🍀</button>
+      <button class="btn" onclick="selectLevel('level3')">🍀🍀🍀</button>
+      <button class="btn" onclick="selectLevel('level4')">🍀🍀🍀🍀</button>
     </div>
 
-    <!-- 区切り -->
     <div class="infinity-separator">— Beyond Bloom —</div>
 
-    <!-- Level∞ -->
     <div class="row">
-      <button class="infinity-btn" onclick="showInfinityGroupMenu()">
-        🌳☀️　∞ Laws of the World
+      <button class="btn infinity-btn" onclick="showInfinityGroupMenu()">
+        🌳☀️ ∞ Laws of the World
       </button>
     </div>
 
     <div class="row">
-      <button onclick="goMenu()">Back to Menu</button>
+      <button class="btn" onclick="goMenu()">Back to Menu</button>
     </div>
   </div>
 
-  <!-- =======================================================
-       2a. Level∞ グループ選択画面 (#infinityGroupMenu)
-  ======================================================== -->
+  <!-- 2a. Level∞ グループ選択 -->
   <div id="infinityGroupMenu" style="display:none;">
-    <h2>Select Field</h2>
+    <h2 class="section-title">Select Field</h2>
     <p class="level-subtitle">Keep going. You'll see why.</p>
 
-    <!-- グループボタン -->
     <div class="row buttons-2">
-      <button onclick="selectInfinityGroup('arithmetic_proportions')" class="category-btn">
+      <button class="btn category-btn" onclick="selectInfinityGroup('arithmetic_proportions')">
         📐 Arithmetic & Proportions
       </button>
-      <button onclick="selectInfinityGroup('forces')" class="category-btn">
+      <button class="btn category-btn" onclick="selectInfinityGroup('forces')">
         💪 Forces & Motion
       </button>
-      <button onclick="selectInfinityGroup('electricity')" class="category-btn">
+      <button class="btn category-btn" onclick="selectInfinityGroup('electricity')">
         ⚡ Electricity & Fields
       </button>
     </div>
 
     <div class="row buttons-1">
-      <button onclick="selectInfinityGroup('energy')" class="category-btn">
+      <button class="btn category-btn" onclick="selectInfinityGroup('energy')">
         🔥 Energy & Heat
       </button>
     </div>
 
     <div class="row buttons-1">
-      <button onclick="selectInfinityGroup('all')" class="category-btn category-btn--all">
+      <button class="btn category-btn category-btn--all" onclick="selectInfinityGroup('all')">
         🌍 All Fields
       </button>
     </div>
 
     <div class="row">
-      <button onclick="goLevel()">Back to Levels</button>
+      <button class="btn" onclick="goLevel()">Back to Levels</button>
     </div>
   </div>
 
-  <!-- =======================================================
-       2b. Level∞ カテゴリー選択画面 (#infinityCategoryMenu)
-  ======================================================== -->
+  <!-- 2b. Level∞ カテゴリー選択 -->
   <div id="infinityCategoryMenu" style="display:none;">
-    <h2 id="categoryMenuTitle">Select Topics</h2>
+    <h2 id="categoryMenuTitle" class="section-title">Select Topics</h2>
     <p class="level-subtitle">Keep going. You'll see why.</p>
 
-    <!-- ボタンは JavaScript で動的に産生 -->
     <div id="categoryButtonsContainer"></div>
 
     <div class="row">
-      <button onclick="showInfinityGroupMenu()">Back to Fields</button>
+      <button class="btn" onclick="showInfinityGroupMenu()">Back to Fields</button>
     </div>
   </div>
 
-
-  <!-- =======================================================
-       3. クイズ画面 (#quiz)
-  ======================================================== -->
+  <!-- 3. クイズ画面 -->
   <div id="quiz" style="display:none;">
     <div class="question-row">
-      <h2 id="question"></h2>
+      <h2 id="question" class="section-title"></h2>
       <div id="formula"></div>
     </div>
 
@@ -132,23 +117,26 @@
     <div id="result"></div>
 
     <div class="row buttons-2">
-      <button id="toggleQuestionBtn" onclick="toggleQuestion()">Show / Hide English</button>
-      <!--<button id="toggleFormulaBtn" onclick="toggleFormula()">Show / Hide Formula</button>-->
+      <button class="btn" id="toggleQuestionBtn" onclick="toggleQuestion()">
+        Show / Hide English
+      </button>
     </div>
 
     <div class="row buttons-2">
-      <!--<button onclick="endSession()">Achievement</button>-->
-      <button onclick="goMenu()">Back to Menu</button>
-      <button onclick="goLevel()">Back to Level</button>
+      <button class="btn" onclick="goMenu()">Back to Menu</button>
+      <button class="btn" onclick="goLevel()">Back to Level</button>
     </div>
 
     <div class="timer-circle">
       <svg width="120" height="120">
-        <circle id="progress" cx="60" cy="60" r="50" stroke="#4caf50" stroke-width="16" fill="none"
-          stroke-dasharray="339" stroke-dashoffset="0" transform="rotate(-90 60 60)" />
+        <circle id="progress" cx="60" cy="60" r="50"
+          stroke="#4caf50" stroke-width="16" fill="none"
+          stroke-dasharray="339" stroke-dashoffset="0"
+          transform="rotate(-90 60 60)" />
       </svg>
     </div>
   </div>
+
 
   <script src="script.js"></script>
   <script src="bloomData.js"></script>

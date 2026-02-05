@@ -1,3 +1,8 @@
+/*
+  Cal. Eden: Next - Bloom Edition
+  © 2026 ふる. This file is part of this project.
+*/
+
 // infinityData/proportionality.js
 // Level∞ 問題データ - 正比例 (Direct Proportionality)
 

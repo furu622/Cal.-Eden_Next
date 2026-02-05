@@ -1,3 +1,8 @@
+/*
+  Cal. Eden: Next - Bloom Edition
+  © 2026 ふる. This file is part of this project.
+*/
+
 // infinityData/inverse_proportionality.js
 // Level∞ 問題データ - 反比例 (Inverse Proportionality)
 

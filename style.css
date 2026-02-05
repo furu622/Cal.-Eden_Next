@@ -1,7 +1,6 @@
 /*
-  Cal. Eden - Bloom Edition
-  © 2026 ふる. All Rights Reserved.
-  Unauthorized use, reproduction, or modification is prohibited.
+  Cal. Eden: Next - Bloom Edition
+  © 2026 ふる. This file is part of this project.
 */
 
 /*=================================================================*/
@@ -26,6 +25,13 @@
 /* 1. 全体共通スタイル */
 /* Cal. Eden - Bloom Edition */
 
+:root {
+  --main-green: #0d6b19;
+  --btn-green: #caf3ca;
+  --btn-accent: #006909;
+}
+
+
 body {
   font-family: sans-serif;
   text-align: center;
@@ -36,7 +42,7 @@ body {
 
 #appTitle {
   font-size: 3em;
-  color: #0d6b19;
+  color: var(--main-green);
   margin-bottom: 10px;
   position: relative;
   display: inline-block;
@@ -57,7 +63,7 @@ body {
   margin-bottom: 40px;
 }
 
-button {
+.btn {
   padding: 10px 20px;
   margin: 5px;
   font-size: 1em;
@@ -71,11 +77,12 @@ button {
   transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 
-button:hover {
+.btn:hover {
   background-color: #b8d62f;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
+
 
 .infinity-separator {
   margin: 28px 0 12px;
@@ -107,7 +114,7 @@ button:hover {
   font-size: 1em;
   padding: 12px 20px;
   border-radius: 12px;
-  background: linear-gradient(135deg, #caf3ca, #caf3ca);
+  background: #caf3ca;
   color: #006909;
   border-color: #2e7d32;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
@@ -160,7 +167,6 @@ button:hover {
 
 .mode-btn::after {
   content: attr(data-tooltip);
-  display: none;
   position: absolute;
   top: 125%;
   left: 50%;
@@ -173,11 +179,11 @@ button:hover {
   font-size: 0.9em;
   z-index: 10;
   opacity: 0;
+  pointer-events: none;
   transition: opacity 0.2s;
 }
 
 .mode-btn:hover::after {
-  display: block;
   opacity: 1;
 }
 
@@ -215,17 +221,26 @@ button:hover {
 .timer-circle { margin: 20px auto; width: 120px; height: 120px; position: relative; }
 .timer-circle svg { width: 100%; height: 100%; }
 
-#levelMenu h2, #infinityGroupMenu h2, #infinityCategoryMenu h2, #quiz h2 {
+
+.section-title {
   font-family: sans-serif;  
-  color: #0d6b19;
+  color: var(--main-green);
   font-size: 2em;
   margin-bottom: 15px;
   display: inline-block;
   position: relative; 
 }
 
-#levelMenu h2::after, #infinityGroupMenu h2::after, #infinityCategoryMenu h2::after, #quiz h2::after { content: "🍃"; position: absolute; right: -1em; top: -0.6em; font-size: 0.5em; }
+.section-title::after {
+  content: "🍃";
+  position: absolute;
+  right: -1em;
+  top: -0.6em;
+  font-size: 0.5em;
+}
+
 
 .level-subtitle { font-size: 1em; font-style: italic; color: #7f8c8d; margin-bottom: 15px; }
 
-.hidden { visibility: hidden; }
+.hidden { display: none; }
+

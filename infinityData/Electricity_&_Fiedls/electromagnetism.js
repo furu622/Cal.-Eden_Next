@@ -1,3 +1,8 @@
+/*
+  Cal. Eden: Next - Bloom Edition
+  © 2026 ふる. This file is part of this project.
+*/
+
 // infinityData/electromagnetism.js
 // Level∞ 問題データ - 電磁気学 (Electromagnetism) 物理スケール最適化版
 

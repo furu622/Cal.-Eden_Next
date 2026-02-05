@@ -1,3 +1,8 @@
+/*
+  Cal. Eden: Next - Bloom Edition
+  © 2026 ふる. This file is part of this project.
+*/
+
 // infinityData.js
 // Level∞ 問題データ統合ファイル
 // 各カテゴリーの問題は infinityData/ フォルダの個別ファイルで定義
