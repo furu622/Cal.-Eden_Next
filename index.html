@@ -103,23 +103,39 @@
 
   <!-- 3. クイズ画面 -->
   <div id="quiz" style="display:none;">
+
     <div class="question-row">
       <h2 id="question" class="section-title"></h2>
       <div id="formula"></div>
     </div>
 
-    <div id="sessionInfo">
-      Correct / Total: <span id="correctCount">0</span>/<span id="totalCount">0</span> |
-      Time: <span id="elapsedTime">0:00</span>
-    </div>
-
     <input type="number" id="answer" placeholder="Your answer">
     <div id="result"></div>
 
+    <!-- 英文表示切り替え -->
     <div class="row buttons-2">
       <button class="btn" id="toggleQuestionBtn" onclick="toggleQuestion()">
         Show / Hide English
       </button>
+    </div>
+
+    <!-- タイマー＋スコア -->
+    <div class="timer-wrapper">
+
+      <div class="timer-circle">
+        <svg width="120" height="120">
+          <circle id="progress" cx="60" cy="60" r="50" stroke="#4caf50" stroke-width="16" fill="none"
+            stroke-dasharray="339" stroke-dashoffset="0" transform="rotate(-90 60 60)" />
+        </svg>
+      </div>
+
+      <div id="sessionInfo">
+        Correct / Total:
+        <span id="correctCount">0</span>/<span id="totalCount">0</span>
+        Time:
+        <span id="elapsedTime">0:00</span>
+      </div>
+
     </div>
 
     <div class="row buttons-2">
@@ -127,14 +143,6 @@
       <button class="btn" onclick="goLevel()">Back to Level</button>
     </div>
 
-    <div class="timer-circle">
-      <svg width="120" height="120">
-        <circle id="progress" cx="60" cy="60" r="50"
-          stroke="#4caf50" stroke-width="16" fill="none"
-          stroke-dasharray="339" stroke-dashoffset="0"
-          transform="rotate(-90 60 60)" />
-      </svg>
-    </div>
   </div>
 
 
@@ -153,7 +161,7 @@
   <!--Functions & Graph Sense  -->
 
   <!--Geometry & Measurement  -->
-  
+
   <!-- Force & Motion  -->
   <script src="infinityData/Force_&_Motion/mechanics_linear.js"></script>
   <script src="infinityData/Force_&_Motion/statics.js"></script>
@@ -175,3 +183,8 @@
 </body>
 
 </html>
+
+<!-- <div id="sessionInfo">
+      Correct / Total: <span id="correctCount">0</span>/<span id="totalCount">0</span> |
+      Time: <span id="elapsedTime">0:00</span>
+    </div> -->
