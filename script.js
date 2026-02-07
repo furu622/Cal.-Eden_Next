@@ -52,6 +52,25 @@ let state = {
 
 /* Level∞ グループマッピング */
 const infinityGroups = {
+  arithmetic_proportions: {
+    name: "Arithmetic",
+    categories: [
+      "proportionality",
+      "inverse_proportionality",
+      "ratios",
+      "scaling_laws",
+      "unit_conversion"
+    ]
+  },
+  algebra_fundamentals: {
+    name: "Algebra Fundamentals",
+    categories: [
+      "linear_equations",
+      "solving_for_variables",
+      "systems_of_equations",
+      "rearranging_formulas"
+    ]
+  },
   forces: {
     name: "Forces & Motion",
     categories: ["mechanics_linear", "statics", "rotational", "machines"]
@@ -64,16 +83,7 @@ const infinityGroups = {
     name: "Energy & Heat",
     categories: ["thermodynamics", "heattransfer", "combustion"]
   },
-  arithmetic_proportions: {
-    name: "Arithmetic",
-    categories: [
-      "proportionality",
-      "inverse_proportionality",
-      "ratios",
-      "scaling_laws",
-      "unit_conversion"
-    ]
-  },
+
   all: {
     name: "All Fields",
     categories: null // すべてのカテゴリーを含む
@@ -87,6 +97,19 @@ if (typeof window !== "undefined") {
 
 /* カテゴリー表示用マッピング */
 const categoryDisplay = {
+  // Arithmetic & Proportions
+  proportionality: { label: "Proportionality", icon: "📈" },
+  inverse_proportionality: { label: "Inverse Proportionality", icon: "📉" },
+  ratios: { label: "Ratios", icon: "⚖️" },
+  scaling_laws: { label: "Scaling Laws", icon: "📏" },
+  unit_conversion: { label: "Unit Conversion", icon: "🔄" },
+
+  // Algebra Fundamentals
+  linear_equations: { label: "Linear Equations", icon: "🧮" },
+  solving_for_variables: { label: "Solving for Variables", icon: "❓" },
+  systems_of_equations: { label: "Systems of Equations", icon: "🧩" },
+  rearranging_formulas: { label: "Rearranging Formulas", icon: "🔧" },
+
   // Forces & Motion
   mechanics_linear: { label: "Linear Motion", icon: "🎊" },
   statics: { label: "Statics", icon: "⚖️" },
@@ -101,13 +124,6 @@ const categoryDisplay = {
   thermodynamics: { label: "Thermodynamics", icon: "🔥" },
   heattransfer: { label: "Heat Transfer", icon: "🌡️" },
   combustion: { label: "Combustion Eng.", icon: "🟦" },
-
-  // Arithmetic & Proportions
-  proportionality: { label: "Proportionality", icon: "📈" },
-  inverse_proportionality: { label: "Inverse Proportionality", icon: "📉" },
-  ratios: { label: "Ratios", icon: "⚖️" },
-  scaling_laws: { label: "Scaling Laws", icon: "📏" },
-  unit_conversion: { label: "Unit Conversion", icon: "🔄" }
 };
 
 /* 3. UI操作 */

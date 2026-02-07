@@ -11,6 +11,7 @@
 // infinityData.js
 // Level∞ 問題データ統合・表示（カテゴリ再編対応）
 
+/*※旧構想：表示名ベースのカテゴリツリー（現在未使用）
 window.infinityCategoryTree = {
   "Forces & Motion": [
     "mechanics_linear",
@@ -28,7 +29,7 @@ window.infinityCategoryTree = {
     "heattransfer"
   ]
 };
-
+*/
 
 const CATEGORY_MAP = {
   proportionality: "Arithmetic & Proportions",
@@ -36,6 +37,11 @@ const CATEGORY_MAP = {
   ratios: "Arithmetic & Proportions",
   scaling_laws: "Arithmetic & Proportions",
   unit_conversion: "Arithmetic & Proportions",
+
+  linear_equations: "Algebra Fundamentals",
+  solving_for_variables: "Algebra Fundamentals",
+  systems_of_equations: "Algebra Fundamentals",
+  rearranging_formulas: "Algebra Fundamentals",
 
   mechanics_linear: "Forces & Motion",
   statics: "Forces & Motion",
