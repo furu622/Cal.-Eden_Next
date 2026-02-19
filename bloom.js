@@ -23,11 +23,54 @@ function randRange(range) {
   const steps = Math.floor((range.max - range.min) / step) + 1;
   return Math.floor(Math.random() * steps) * step + range.min;
 }
-
+/*============================
 function roundSmart(n) {
   // 整数 or 小数第一位
   return Number.isInteger(n) ? n : Math.round(n * 10) / 10;
 }
+=============================*/
+
+  // 答えの表示を整える（指数表記が適切な場合はそちらを採用）
+  function formatAnswer(value) {
+    if (value === 0) return "0";
+
+    const abs = Math.abs(value);
+
+    if (abs < 0.001 || abs >= 1000) {
+      return value.toExponential(3);
+    }
+
+    return Math.round(value * 1000) / 1000;
+  }
+
+  function checkAnswerUI() {
+    const raw = document.getElementById("answer").value;
+
+    if (raw.trim() === "") {
+      document.getElementById("result").textContent = "Please enter a number.";
+      return;
+    }
+
+    const input = Number(raw);
+    const correct = state.answer;
+
+    const tolerance = Math.max(Math.abs(correct) * 0.05, 1e-12);
+    const isCorrect = Math.abs(input - correct) <= tolerance;
+
+    const result = document.getElementById("result");
+    result.textContent = isCorrect
+      ? "Correct!"
+      : `Wrong! Answer is ${formatAnswer(correct)}`;
+
+    recordAnswer(isCorrect);
+    updateSessionDisplay();
+
+    state.isAnswered = true;
+    state.waitingNext = true;
+
+    stopTimer();
+    speechSynthesis.cancel();
+  }
 
 // 人名リスト
 const namePool = ["Alice", "Bob", "Charlie", "Diana", "Emma", "Frank", "Grace", "Henry", "Iris", "Jack", "Kate", "Leo", "Mia", "Noah", "Olivia", "Paul"];
@@ -193,10 +236,8 @@ function getInfinityQuestion() {
 
   let answer = q.formula(values);
 
-  // 整数か小数第一位
-  answer = Number.isInteger(answer)
-    ? answer
-    : Math.round(answer * 10) / 10;
+
+
 
   return {
     result: answer,

@@ -73,15 +73,28 @@ const infinityGroups = {
   },
   forces: {
     name: "Forces & Motion",
-    categories: ["mechanics_linear", "statics", "rotational", "machines"]
+    categories: [
+      "mechanics_linear", 
+      "statics", 
+      "rotational", 
+      "machines"
+    ]
   },
   electricity: {
     name: "Electricity & Fields",
-    categories: ["electromagnetism", "circuits"]
+    categories: [
+      "electromagnetism", 
+      "circuits"
+    ]
   },
   energy: {
     name: "Energy & Heat",
-    categories: ["thermodynamics", "heattransfer", "combustion"]
+    categories: [
+      "thermodynamics",
+      "fluidmechanics", 
+      "heattransfer", 
+      "combustion"
+    ]
   },
 
   all: {
@@ -107,7 +120,7 @@ const categoryDisplay = {
   // Algebra Fundamentals
   linear_equations: { label: "Linear Equations", icon: "🧮" },
   solving_for_variables: { label: "Solving for Variables", icon: "❓" },
-  systems_of_equations: { label: "Systems of Equations", icon: "🧩" },
+  systems_of_equations: { label: "Systems of Equations", icon: "🔗" },
   rearranging_formulas: { label: "Rearranging Formulas", icon: "🔧" },
 
   // Forces & Motion
@@ -122,6 +135,7 @@ const categoryDisplay = {
 
   // Energy & Heat
   thermodynamics: { label: "Thermodynamics", icon: "🔥" },
+  fluidmechanics: { label: "Fluid Mechanics", icon: "💧" },
   heattransfer: { label: "Heat Transfer", icon: "🌡️" },
   combustion: { label: "Combustion Eng.", icon: "🟦" },
 };
@@ -241,10 +255,12 @@ function generateQuestion() {
   return getBloomQuestion();
 }
 
+
 // 新設: 次の問題を準備する（読み上げ → タイマー開始）
 function prepareNextQuestion() {
   const q = generateQuestion();
   state.answer = q.result;
+  console.log("After generation, state.answer =", state.answer); // デバッグ用に答えをコンソールに表示 
   state.isAnswered = false;
   state.waitingNext = false;
   renderQuestion(q);
@@ -282,11 +298,25 @@ function renderQuestion(q) {
 
 /* 6. 回答処理 */
 function checkAnswerUI() {
-  const input = Number(document.getElementById("answer").value);
-  const isCorrect = input === state.answer;
+  const raw = document.getElementById("answer").value;
+
+  if (raw.trim() === "") {
+    document.getElementById("result").textContent = "Please enter a number.";
+    return;
+  }
+
+  const input = Number(raw);
+  const correct = state.answer;
+
+  // 相対誤差5%、ただし最低許容誤差あり
+  const tolerance = Math.max(Math.abs(correct) * 0.05, 1e-12);
+
+  const isCorrect = Math.abs(input - correct) <= tolerance;
 
   const result = document.getElementById("result");
-  result.textContent = isCorrect ? "Correct!" : `Wrong! Answer is ${state.answer}`;
+  result.textContent = isCorrect
+    ? "Correct!"
+    : `Wrong! Answer is ${formatAnswer(correct)}`;
 
   recordAnswer(isCorrect);
   updateSessionDisplay();
@@ -297,6 +327,7 @@ function checkAnswerUI() {
   stopTimer();
   speechSynthesis.cancel();
 }
+
 
 /* 7. タイマー */
 function startTimer() {

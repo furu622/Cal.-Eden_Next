@@ -73,8 +73,6 @@ window.infinityProblems.combustion = [
     formula: (v) => v.CO2
   },
 
-
-
   {
     template: "A burner produces {Q} MJ of heat and operates for {t} hours. Calculate the average power output in kW (1 MJ/h = 0.278 kW).",
     vars: {
