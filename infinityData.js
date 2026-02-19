@@ -54,6 +54,7 @@ const CATEGORY_MAP = {
   thermodynamics: "Energy & Heat",
   combustion: "Energy & Heat",
   heattransfer: "Energy & Heat",
+  fluidmechanics: "Energy & Heat",
 };
 
 function countProblems(data) {

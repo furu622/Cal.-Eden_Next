@@ -43,6 +43,111 @@ function roundSmart(n) {
     return Math.round(value * 1000) / 1000;
   }
 
+
+// =====================================================
+// Infinityモード：カテゴリ別 正誤判定 & 表示ルール
+// =====================================================
+  function getAnswerRuleForCategory(category) {
+    switch(category) {
+
+      // -----------------------------
+      // Arithmetic & Proportions
+      // -----------------------------
+      case "proportionality":
+      case "inverse_proportionality":
+      case "ratios":
+      case "scaling_laws":
+      case "unit_conversion":
+        return {
+          check: (input, correct) => {
+            // 相対誤差 2%まで許容
+            const tolerance = Math.max(Math.abs(correct) * 0.02, 1e-12);
+            return Math.abs(input - correct) <= tolerance;
+          },
+          format: value => {
+            // 整数なら整数表示、それ以外は小数2桁
+            return Number.isInteger(value) ? value : (Math.round(value*100)/100);
+          }
+        };
+
+      // -----------------------------
+      // Algebra Fundamentals
+      // -----------------------------
+      case "linear_equations":
+      case "solving_for_variables":
+      case "systems_of_equations":
+      case "rearranging_formulas":
+        return {
+          check: (input, correct) => Math.round(input) === correct,
+          format: value => value
+        };
+
+      // -----------------------------
+      // Forces & Motion
+      // -----------------------------
+      case "mechanics_linear":
+      case "statics":
+      case "rotational":
+      case "machines":
+        return {
+          check: (input, correct) => Math.round(input) === correct,
+          format: value => value
+        };
+
+      // -----------------------------
+      // Electricity & Field
+      // -----------------------------
+      case "electromagnetism":
+      case "circuits":
+        return {
+          check: (input, correct) => {
+            const tolerance = Math.max(Math.abs(correct) * 0.03, 1e-12); // 3%相対誤差
+            return Math.abs(input - correct) <= tolerance;
+          },
+          format: value => Number.isInteger(value) ? value : (Math.round(value*10)/10)
+        };
+
+      // -----------------------------
+      // Energy & Heat
+      // -----------------------------
+      case "thermodynamics":
+      case "combustion":
+      case "heattransfer":
+        return {
+          check: (input, correct) => {
+            const tolerance = Math.max(Math.abs(correct) * 0.02, 1e-12); // 2%相対誤差
+            return Math.abs(input - correct) <= tolerance;
+          },
+          format: value => Number.isInteger(value) ? value : (Math.round(value*10)/10)
+        };
+
+      // -----------------------------
+      // Fluid Mechanics
+      // -----------------------------
+      case "fluidmechanics":
+        return {
+          check: (input, correct) => {
+            // 微小値のため絶対誤差 1e-6 で判定
+            return Math.abs(input - correct) <= 1e-6;
+          },
+          format: value => value.toExponential(3) // 指数表記
+        };
+
+      // -----------------------------
+      // デフォルト
+      // -----------------------------
+      default:
+        return {
+          check: (input, correct) => Math.abs(input - correct) <= Math.max(Math.abs(correct) * 0.05, 1e-12),
+          format: value => formatAnswer(value)
+        };
+    }
+  }
+
+
+  /*========================================================
+    checkAnswerUI() - Infinityモード対応版
+  ========================================================*/
   function checkAnswerUI() {
     const raw = document.getElementById("answer").value;
 
@@ -54,14 +159,28 @@ function roundSmart(n) {
     const input = Number(raw);
     const correct = state.answer;
 
-    const tolerance = Math.max(Math.abs(correct) * 0.05, 1e-12);
-    const isCorrect = Math.abs(input - correct) <= tolerance;
+    let isCorrect, formatted;
 
-    const result = document.getElementById("result");
-    result.textContent = isCorrect
+    if (state.level.key === "infinity") {
+      // Infinityモード用
+      const category = state.infinityCategory || "all";
+      const rule = getAnswerRuleForCategory(category);
+
+      isCorrect = rule.check(input, correct);
+      formatted = rule.format(correct);
+
+    } else {
+      // Level1〜4: 厳密一致
+      isCorrect = input === correct;
+      formatted = correct;
+    }
+
+    const resultEl = document.getElementById("result");
+    resultEl.textContent = isCorrect
       ? "Correct!"
-      : `Wrong! Answer is ${formatAnswer(correct)}`;
+      : `Wrong! Answer is ${formatted}`;
 
+    // セッション管理
     recordAnswer(isCorrect);
     updateSessionDisplay();
 
@@ -71,6 +190,9 @@ function roundSmart(n) {
     stopTimer();
     speechSynthesis.cancel();
   }
+
+
+
 
 // 人名リスト
 const namePool = ["Alice", "Bob", "Charlie", "Diana", "Emma", "Frank", "Grace", "Henry", "Iris", "Jack", "Kate", "Leo", "Mia", "Noah", "Olivia", "Paul"];
