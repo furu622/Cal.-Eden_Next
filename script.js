@@ -50,6 +50,24 @@ let state = {
   infinityCategory: "all" // Level∞ のカテゴリー（デフォルト：すべて）
 };
 
+function getBGM() {
+  return document.getElementById("bgm");
+}
+
+function playBGM() {
+  const bgm = getBGM();
+  if (!bgm) return;
+  bgm.volume = 0.2; // Nextは少し控えめが良い
+  bgm.play().catch(() => {});
+}
+
+function stopBGM() {
+  const bgm = getBGM();
+  if (!bgm) return;
+  bgm.pause();
+  bgm.currentTime = 0;
+}
+
 /* Level∞ グループマッピング */
 const infinityGroups = {
   arithmetic_proportions: {
@@ -160,6 +178,8 @@ function toggleQuestion() {
 
 /* 4. レベル選択 */
 function selectLevel(key) {
+  playBGM();
+
   state.level = levels[key];
   state.level.key = key; // ← これがないと getBloomQuestion がエラーになる
   showScreen("quiz");
@@ -388,6 +408,7 @@ document.addEventListener("keydown", e => {
 let elapsedTimerId = null;
 
 function goMenu() {
+  stopBGM();
   document.getElementById("gameMenu").style.display = "block";
   ["levelMenu","infinityGroupMenu","infinityCategoryMenu","quiz"].forEach(id => document.getElementById(id).style.display="none");
   stopTimer();
