@@ -23,6 +23,7 @@ function randRange(range) {
   const steps = Math.floor((range.max - range.min) / step) + 1;
   return Math.floor(Math.random() * steps) * step + range.min;
 }
+
 /*============================
 function roundSmart(n) {
   // 整数 or 小数第一位
@@ -179,6 +180,15 @@ function roundSmart(n) {
     resultEl.textContent = isCorrect
       ? "Correct!"
       : `Wrong! Answer is ${formatted}`;
+
+    // SE再生
+    if (isCorrect) {
+      correctSE.currentTime = 0;
+      correctSE.play().catch(() => {});
+    } else {
+      wrongSE.currentTime = 0;
+      wrongSE.play().catch(() => {});
+    }
 
     // セッション管理
     recordAnswer(isCorrect);

@@ -20,6 +20,15 @@
 10. セッション管理
 ======================================== */
 
+
+// 0. ===== SE =====
+const correctSE = new Audio("assets/correct.mp3");
+const wrongSE = new Audio("assets/wrong.mp3");
+
+correctSE.volume = 0.3;
+wrongSE.volume = 0.3;
+
+
 /* 1. 設定データ */
 const levels = {
   level1: { addsub: { min: 0, max: 10 },  muldiv: { min: 1, max: 10 },  time: 10000 },
@@ -337,6 +346,15 @@ function checkAnswerUI() {
   result.textContent = isCorrect
     ? "Correct!"
     : `Wrong! Answer is ${formatAnswer(correct)}`;
+  
+  // SE再生
+  if (isCorrect) {
+    correctSE.currentTime = 0;
+    correctSE.play().catch(() => {});
+  } else {
+    wrongSE.currentTime = 0;
+    wrongSE.play().catch(() => {});
+  }
 
   recordAnswer(isCorrect);
   updateSessionDisplay();
