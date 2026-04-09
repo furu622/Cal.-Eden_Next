@@ -3,6 +3,12 @@
 © 2026 ふる. This file is part of this project.
 */
 
+// ========================================
+// Bloom Mode Extension
+// ・Infinityモード対応
+// ・checkAnswerUIを上書き
+// ========================================
+
 /*=================================================================*/
 // Bloom Mode Question System
 // - Normal Bloom (Level1–4)
@@ -149,6 +155,7 @@ function roundSmart(n) {
   /*========================================================
     checkAnswerUI() - Infinityモード対応版
   ========================================================*/
+  // Bloom専用: Infinityモード用の拡張判定（script.jsを上書き）
   function checkAnswerUI() {
     const raw = document.getElementById("answer").value;
 
