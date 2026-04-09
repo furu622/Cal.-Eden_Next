@@ -3,3 +3,5 @@ qr_codes/
 
 # Pythonスクリプトも無視する場合
 tools/generate_qr.py
+
+Cal. Eden_Next.code-workspace
